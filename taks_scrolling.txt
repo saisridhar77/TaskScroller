@@ -1,0 +1,41 @@
+Task Scrolling inspired by Completely Fair Scheduler
+
+
+1)Work Density
+	
+	dailyRequired = remainingWork/daysRemaining
+	if dailyRequired < 1 : Relaxed task
+	if dailyRequired = 1 : Perfect time
+	if dailyRequired > 1 : Oops it need priority
+	
+2)Urgency = min(10,dailyRequired*10)
+	cap is 10 for max urgency
+	if dailyRequired = 0.5 urgency = 5
+	
+3)Slack = daysRemaining - remainingWork
+
+4)Priority Function
+	Score = w1*U + w2*I + w3*C + w4*(10-E) + w5*(10-D)
+	where
+		U = urgency
+		I = Importance
+		C = Consequences
+		E = effort
+		D = difficulty
+	All of these will be the inputs provided by the user
+
+5)CFS style penalty
+	penalty = alpha / max(1,daysSinceLastScheduled)
+	
+	this basically prevents 2 tasks appearing as must do
+	
+6)Critical Condition
+	isCritical = remainingWork >= dailyRemaining
+	this means if i dont work daily for this i will miss deadline-aware
+	
+7)Allocation
+	for each task
+		allocation = min(dailyRequired,remainingCapacity)
+	
+8)Scheduling
+	sum of allocations <= dailyCapacity
