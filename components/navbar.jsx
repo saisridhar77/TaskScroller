@@ -37,7 +37,6 @@ function Navbar({ onGetStarted }) {
         borderBottom: `1px solid ${navBorder}`,
       }}>
 
-      {/* Top bar */}
       <div className="max-w-4xl mx-auto px-8 h-14 flex items-center justify-between">
 
         {/* Logo */}
@@ -51,9 +50,7 @@ function Navbar({ onGetStarted }) {
           </span>
         </a>
 
-        {/* Desktop */}
         <div className="hidden md:flex items-center gap-6">
-          {/* Theme toggle */}
           <button
             onClick={toggleTheme}
             className="transition-colors"
@@ -89,7 +86,6 @@ function Navbar({ onGetStarted }) {
           )}
         </div>
 
-        {/* Mobile hamburger */}
         <button aria-label="Toggle menu" aria-expanded={open}
           className="md:hidden" onClick={() => setOpen(!open)}>
           <div className="flex flex-col gap-[5px]">
@@ -103,7 +99,6 @@ function Navbar({ onGetStarted }) {
         </button>
       </div>
 
-      {/* Mobile menu */}
       <div className={`md:hidden overflow-hidden transition-all duration-300 ${open ? "max-h-96" : "max-h-0"}`}
         style={{ backgroundColor: dark ? "rgba(15,15,15,0.97)" : "rgba(240,239,233,0.97)" }}>
         <div className="px-8 py-4 flex flex-col gap-4">

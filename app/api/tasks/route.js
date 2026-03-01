@@ -15,10 +15,9 @@ async function getUserIdFromReq(req) {
   if (!token) return null;
 
   const user = await getUserFromToken(token);
-  return user ? user._id : null;
+  return user ? user._id.toString() : null;
 }
 
-// GET /api/tasks
 export async function GET(req) {
   const userId = await getUserIdFromReq(req);
 
@@ -40,14 +39,13 @@ export async function GET(req) {
     task.status === "pending"
   ) {
     task.status = "missed";
-    await task.save(); // persist in DB
+    await updateTaskById(task._id, userId.toString(), { status: "missed" });
   }
 }
 
   return NextResponse.json({ tasks }, { status: 200 });
 }
 
-// POST /api/tasks
 export async function POST(req) {
   const userId = await getUserIdFromReq(req);
 

@@ -16,18 +16,14 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Task Scroller",
   description: "Task Scheduler inspired by Linux Process Scheduling",
-  // Favicon generated from https://favicon.io/emoji-favicons/spiral-calendar-pad/
   icons: {
     icon: "/s.png",
-
   },
 };
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Prevents flash of wrong theme on first paint */}
         <script dangerouslySetInnerHTML={{
           __html: `
             try {

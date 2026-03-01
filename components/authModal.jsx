@@ -49,7 +49,6 @@ export default function AuthModal({ onClose }) {
     }
   };
 
-  // ── theme tokens ────────────────────────────────────────────────────────
   const paper      = dark ? "#0f0f0f"                : "#f0efe9";
   const ink        = dark ? "#e8e6e0"                : "#1c1c1c";
   const muted      = dark ? "#7a7872"                : "#71716e";
@@ -90,13 +89,11 @@ export default function AuthModal({ onClose }) {
         }
       `}</style>
 
-      {/* Overlay */}
       <div ref={overlayRef}
         onClick={e => { if (e.target === overlayRef.current) onClose(); }}
         className="fixed inset-0 z-[200] flex items-center justify-center"
         style={{ backgroundColor: "rgba(0,0,0,0.5)", backdropFilter: "blur(6px)" }}>
 
-        {/* Card */}
         <div className="modal-paper relative w-full max-w-sm mx-4"
           style={{
             background: cardBg,
@@ -108,13 +105,11 @@ export default function AuthModal({ onClose }) {
             backgroundImage: `repeating-linear-gradient(transparent, transparent 27px, ${lineColor} 27px, ${lineColor} 28px)`,
           }}>
 
-          {/* Red margin line */}
           <div className="absolute top-0 bottom-0 left-10 w-px pointer-events-none"
             style={{ background: marginLine }} />
 
           <div className="relative px-10 py-10">
 
-            {/* Close */}
             <button onClick={onClose}
               className="absolute top-5 right-5 w-6 h-6 flex items-center justify-center transition-colors"
               style={{ color: sub }}
@@ -127,7 +122,6 @@ export default function AuthModal({ onClose }) {
               </svg>
             </button>
 
-            {/* Header */}
             <div className="mb-8">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-5 h-5 flex items-center justify-center"
@@ -146,7 +140,6 @@ export default function AuthModal({ onClose }) {
               </p>
             </div>
 
-            {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-3">
               <div>
                 <label className="block text-[10px] uppercase tracking-widest font-mono mb-1.5" style={{ color: muted }}>Email</label>
@@ -180,7 +173,6 @@ export default function AuthModal({ onClose }) {
               </div>
             </form>
 
-            {/* Switch mode */}
             <div className="mt-6 pt-5" style={{ borderTop: `1px solid ${divider}` }}>
               <p className="text-[11px] font-mono text-center" style={{ color: muted }}>
                 {mode === "signup" ? "Already have an account?" : "Don't have an account?"}{" "}

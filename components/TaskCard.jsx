@@ -24,7 +24,6 @@ export default function TaskCard({ task, onComplete, onDelete, onEdit, isMustDo 
       onMouseEnter={e => e.currentTarget.style.backgroundColor = hoverBg}
       onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}
     >
-      {/* Title row */}
       <div className="flex items-start justify-between gap-4 mb-1.5">
         <div className="flex items-start gap-3 min-w-0">
           {isMustDo && (
@@ -62,23 +61,20 @@ export default function TaskCard({ task, onComplete, onDelete, onEdit, isMustDo 
         </div>
       </div>
 
-      {/* Description */}
       {task.description && (
         <p className="text-[12px] font-mono mb-3 leading-relaxed" style={{ color: muted }}>
           {task.description}
         </p>
       )}
 
-      {/* Allocation info */}
       {task.allocated !== undefined && (
         <div className="mb-3 flex items-center gap-4 text-[11px] font-mono" style={{ color: muted }}>
-          <span>today&nbsp;<span className="font-bold" style={{ color: sub }}>{task.allocated.toFixed(2)} days</span></span>
+          <span>today finish <span className="font-bold" style={{ color: sub }}>{(task.allocated*100).toFixed(0)}% work</span></span>
           <span style={{ color: trackBg }}>·</span>
-          <span>pace&nbsp;<span className="font-bold" style={{ color: sub }}>{task.dailyRequired?.toFixed(2)} / day</span></span>
+          <span>pace&nbsp;<span className="font-bold" style={{ color: sub }}>{(task.dailyRequired*100)?.toFixed(0)}% / day</span></span>
         </div>
       )}
 
-      {/* Progress bar */}
       <div className="mb-3">
         <div className="w-full h-px relative" style={{ background: trackBg }}>
           <div className="absolute left-0 top-0 h-px transition-all duration-500"
@@ -86,10 +82,9 @@ export default function TaskCard({ task, onComplete, onDelete, onEdit, isMustDo 
         </div>
       </div>
 
-      {/* Remaining + slack */}
       <div className="flex items-center justify-between flex-wrap gap-2">
         <span className="text-[11px] font-mono" style={{ color: muted }}>
-          {remaining.toFixed(2)} days remaining
+          {(remaining*100).toFixed(0)}% work remaining
         </span>
 
         {task.slack !== undefined && (
@@ -102,12 +97,12 @@ export default function TaskCard({ task, onComplete, onDelete, onEdit, isMustDo 
             ) : task.slack === 0 ? (
               <span className="flex items-center gap-1" style={{ color: dark ? "#c97a30" : "#92400e" }}>
                 <Target className="w-3 h-3" />
-                zero slack — execute daily
+                zero slack — must execute daily
               </span>
             ) : (
               <span className="flex items-center gap-1" style={{ color: muted }}>
                 <Zap className="w-3 h-3" />
-                {task.slack.toFixed(1)} days room
+                {task.slack.toFixed(1)} days of breathing room
               </span>
             )}
           </span>

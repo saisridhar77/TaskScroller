@@ -24,7 +24,6 @@ export default function Dashboard() {
   const [editingTask, setEditingTask] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // ── theme tokens ──────────────────────────────────────────────────────────
   const paper = dark ? "#0f0f0f" : "#f0efe9";
   const rule = dark ? "#1e1e1e" : "#dddbd3";
   const margin = dark ? "#3a2020" : "#f0c0c0";
@@ -65,11 +64,19 @@ export default function Dashboard() {
   const handleTaskProgress = async (task) => {
     try {
       const token = localStorage.getItem("token");
+      const updatedTaskData = calculateNextTaskState(task);
+
       await axios.put(
         `/api/tasks/${task._id}`,
-        { status: "completed", completed_at: new Date().toISOString() },
-        { headers: { Authorization: `Bearer ${token}` } },
+        {
+          remaining_days:    updatedTaskData.remaining_days,
+          status:            updatedTaskData.status,
+          last_scheduled_at: updatedTaskData.last_scheduled_at,
+          completed_at:      updatedTaskData.completed_at,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
+
       await loadTasks();
     } catch (err) {
       console.error("Error updating progress:", err);
@@ -102,7 +109,6 @@ export default function Dashboard() {
   );
   const completedTasks = tasks.filter((t) => t.status === "completed");
 
-  // ── Loading ───────────────────────────────────────────────────────────────
   if (loading) {
     return (
       <div
@@ -134,13 +140,11 @@ export default function Dashboard() {
         backgroundImage: `repeating-linear-gradient(transparent, transparent 31px, ${rule} 31px, ${rule} 32px)`,
       }}
     >
-      {/* Red margin line */}
       <div
         className="fixed top-0 bottom-0 left-[68px] w-px pointer-events-none z-10"
         style={{ background: margin }}
       />
 
-      {/* ── Header ── */}
       <header
         className="sticky top-0 z-40 backdrop-blur-sm"
         style={{
@@ -179,7 +183,6 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="flex gap-3">
-            {/* Theme toggle */}
             <button
               onClick={toggleTheme}
               className="transition-colors"
@@ -212,9 +215,7 @@ export default function Dashboard() {
         </div>
       </header>
 
-      {/* ── Main ── */}
       <main className="max-w-4xl mx-auto px-8 md:px-20 py-16">
-        {/* Title + Add Task */}
         <div className="flex items-start justify-between mb-14">
           <div>
             <h1
@@ -283,7 +284,6 @@ export default function Dashboard() {
           ))}
         </div>
 
-        {/* Must Do */}
         {schedule?.mustDoTask && (
           <div className="mb-14">
             <div className="flex items-baseline gap-3 mb-6">
@@ -313,7 +313,6 @@ export default function Dashboard() {
           </div>
         )}
 
-        {/* Work Allocation */}
         {schedule?.scheduledTasks?.length > 0 && (
           <div>
             <div className="flex items-baseline gap-3 mb-6">
@@ -349,7 +348,6 @@ export default function Dashboard() {
           </div>
         )}
 
-        {/* Empty state */}
         {incompleteTasks.length === 0 && (
           <div
             className="text-center py-24"

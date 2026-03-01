@@ -52,7 +52,6 @@ export default function Home() {
 
       <div className="grain" />
 
-      {/* Red margin line */}
       <div className="fixed top-0 bottom-0 left-[68px] w-px pointer-events-none z-10"
         style={{ background: margin }} />
 
@@ -61,7 +60,6 @@ export default function Home() {
 
       <div className="relative">
 
-        {/* ── HERO ── */}
         <section className="min-h-screen flex flex-col justify-center pt-14">
           <div ref={heroRef} className="max-w-4xl mx-auto px-8 md:px-20 py-24 w-full">
 
@@ -141,7 +139,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── FEATURES ── */}
         <section id="features" style={{ borderTop: `1px solid ${dark ? "#222" : "#d4d4d8"}` }}>
           <div ref={featRef} className="max-w-4xl mx-auto px-8 md:px-20 py-24 w-full">
             <div className="flex items-baseline gap-4 mb-14">
@@ -174,7 +171,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── HOW IT WORKS ── */}
         <section id="how-it-works" style={{ borderTop: `1px solid ${dark ? "#222" : "#d4d4d8"}` }}>
           <div ref={howRef} className="max-w-4xl mx-auto px-8 md:px-20 py-24 w-full">
             <div className="flex items-baseline gap-4 mb-14">
@@ -212,7 +208,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── CTA ── */}
         <section id="get-started" style={{ borderTop: `1px solid ${dark ? "#222" : "#d4d4d8"}` }}>
           <div ref={ctaRef}
             className="max-w-4xl mx-auto px-8 md:px-20 py-24 w-full flex flex-col md:flex-row md:items-end justify-between gap-10"
@@ -244,7 +239,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── FOOTER ── */}
         <footer style={{ borderTop: `1px solid ${dark ? "#222" : "#d4d4d8"}` }}>
           <div className="max-w-4xl mx-auto px-8 md:px-20 py-6 flex flex-col md:flex-row items-center justify-between gap-2">
             <span className="text-[10px] font-mono uppercase tracking-widest" style={{ color: muted }}>© 2026 Task Scroller</span>
